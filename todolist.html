@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>To-Do List</title>
+
+<style>
+body{
+font-family: Arial;
+background:#f0f0f0;
+}
+
+.box{
+width:300px;
+margin:60px auto;
+background:white;
+padding:15px;
+border-radius:8px;
+}
+
+input{
+width:70%;
+padding:6px;
+}
+
+button{
+padding:6px 10px;
+margin-left:5px;
+}
+
+li{
+list-style:none;
+padding:6px;
+margin-top:8px;
+background:#eee;
+display:flex;
+justify-content:space-between;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+<h3>To-Do List</h3>
+
+<input type="text" id="task">
+<button onclick="addTask()">Add</button>
+
+<ul id="list"></ul>
+</div>
+
+<script>
+function addTask(){
+
+let text = document.getElementById("task").value;
+
+if(text=="") return;
+
+let li = document.createElement("li");
+
+li.innerHTML = `
+<input type="checkbox" onclick="done(this)">
+<span>${text}</span>
+<button onclick="removeTask(this)">X</button>
+`;
+
+document.getElementById("list").appendChild(li);
+
+document.getElementById("task").value="";
+}
+
+function done(x){
+let span = x.nextElementSibling;
+span.style.textDecoration = x.checked ? "line-through" : "none";
+}
+
+function removeTask(btn){
+btn.parentElement.remove();
+}
+</script>
+
+</body>
+</html>
